@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    serverActions: true,
-  },
   reactStrictMode: true,
   swcMinify: true,
   images: {
@@ -14,6 +11,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "reqres.in",
+      },
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
       },
     ],
   },

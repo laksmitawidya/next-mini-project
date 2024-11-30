@@ -1,4 +1,6 @@
 import UserDetail from "@/components/user/UserDetail";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 const fetchUserDetail = async (id: number) => {
   const res = await fetch(`https://reqres.in/api/users/${id}`);
@@ -13,14 +15,19 @@ const fetchUserDetail = async (id: number) => {
 const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const slug = (await params).slug;
   const userDetail = await fetchUserDetail(Number(slug));
-  console.log(userDetail.data);
+  const session = await getServerSession();
+
+  if (!session) {
+    redirect("/unauthorized");
+  }
+
   return (
-    <div>
+    <>
       {userDetail?.data.data && <UserDetail {...userDetail.data.data} />}
       {userDetail?.error && (
         <div className="text-red-700">{userDetail?.error}</div>
       )}
-    </div>
+    </>
   );
 };
 

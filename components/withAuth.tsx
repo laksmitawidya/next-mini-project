@@ -1,31 +1,29 @@
 "use client";
 
-import { CircularProgress } from "@mui/material";
+import { useUserStore } from "@/libs/UserStore";
+import { Utils } from "@/libs/utils";
 import { useSession } from "next-auth/react";
-import { usePathname, useRouter } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 
 const publicRoutes = { login: "/login" };
+const privateRoutes = { users: "/users" };
 
 export const withAuth = (WrappedComponent: any) => {
   return function WithAuth(props: any) {
-    const { status } = useSession();
     const pathname = usePathname();
-    const router = useRouter();
 
-    if (status === "authenticated") {
-      if (pathname === "/") {
-        return router.push("/users");
-      }
+    const userSession = Utils.getUserSession();
 
-      if (pathname === publicRoutes.login) {
-        return router.push("/users");
-      }
+    if (!userSession && pathname !== publicRoutes.login) {
+      return redirect(publicRoutes.login);
     }
 
-    if (status === "unauthenticated") {
-      if (pathname !== publicRoutes.login) {
-        return router.push(publicRoutes.login);
-      }
+    if (!userSession && pathname !== publicRoutes.login) {
+      return null;
+    }
+
+    if (userSession && pathname === publicRoutes.login) {
+      return redirect(privateRoutes.users);
     }
 
     return <WrappedComponent {...props} />;

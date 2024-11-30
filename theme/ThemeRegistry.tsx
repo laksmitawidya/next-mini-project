@@ -8,7 +8,6 @@ import { NextAppDirEmotionCacheProvider } from "./EmotionCache";
 
 const manrope = Manrope({
   subsets: ["latin"],
-  weight: ["400", "700"],
 });
 
 const themeOptions: ThemeOptions = {

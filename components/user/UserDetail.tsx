@@ -1,13 +1,7 @@
 "use client";
 
 import { UserResponse } from "@/types/common";
-import {
-  Avatar,
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-} from "@mui/material";
+import { Avatar, Card, CardContent, CardMedia } from "@mui/material";
 import Image from "next/image";
 
 const UserDetail = ({
@@ -21,8 +15,10 @@ const UserDetail = ({
     <div className="w-full h-full p-5">
       <Card className="min-w-[320px]">
         <CardMedia
-          image="/static/images/cards/contemplative-reptile.jpg"
+          image={`https://picsum.photos/id/${id + 15}/700/500`}
           title="Users"
+          component="img"
+          height="200"
         />
         <CardContent>
           <div className="flex gap-x-10">
@@ -35,6 +31,7 @@ const UserDetail = ({
                   src={avatar}
                   alt={first_name ?? ""}
                   fill
+                  sizes="40px"
                   style={{ borderRadius: "50%" }}
                 />
               ) : (
@@ -42,12 +39,48 @@ const UserDetail = ({
               )}
             </Avatar>
             <div>
-              <Typography gutterBottom variant="h5" component="div">
+              <h1>
                 {first_name} {last_name}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {email}
-              </Typography>
+              </h1>
+              <h4>{email}</h4>
+
+              <div className="mt-5">
+                <h4>Description</h4>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro
+                tenetur laboriosam unde, exercitationem vitae nisi similique
+                maxime eligendi eveniet ipsam dignissimos dolores ipsa, quasi,
+                nostrum laudantium quis consequatur nam explicabo.
+              </div>
+              <div className="mt-5">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro
+                tenetur laboriosam unde, exercitationem vitae nisi similique
+                maxime eligendi eveniet ipsam dignissimos dolores ipsa, quasi,
+                nostrum laudantium quis consequatur nam explicabo.
+              </div>
+              <div className="mt-5">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro
+                tenetur laboriosam unde, exercitationem vitae nisi similique
+                maxime eligendi eveniet ipsam dignissimos dolores ipsa, quasi,
+                nostrum laudantium quis consequatur nam explicabo.
+              </div>
+              <div className="mt-5">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro
+                tenetur laboriosam unde, exercitationem vitae nisi similique
+                maxime eligendi eveniet ipsam dignissimos dolores ipsa, quasi,
+                nostrum laudantium quis consequatur nam explicabo.
+              </div>
+              <div className="mt-5">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro
+                tenetur laboriosam unde, exercitationem vitae nisi similique
+                maxime eligendi eveniet ipsam dignissimos dolores ipsa, quasi,
+                nostrum laudantium quis consequatur nam explicabo.
+              </div>
+              <div className="mt-5">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro
+                tenetur laboriosam unde, exercitationem vitae nisi similique
+                maxime eligendi eveniet ipsam dignissimos dolores ipsa, quasi,
+                nostrum laudantium quis consequatur nam explicabo.
+              </div>
               <div className="mt-5">
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro
                 tenetur laboriosam unde, exercitationem vitae nisi similique

@@ -1,74 +1,43 @@
 "use client";
 
-import { useState } from "react";
-import React, { ReactNode } from "react";
-import { usePathname } from "next/navigation";
+import HomeIcon from "@mui/icons-material/Home";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
-import Tooltip from "@mui/material/Tooltip";
-import Typography from "@mui/material/Typography";
+import { usePathname } from "next/navigation";
+import { withSession } from "./withSession";
 
-type TBreadCrumbProps = {
-  homeElement: ReactNode;
-  container?: string;
-  listClasses?: string;
-  activeClasses?: string;
-  capitalizeLinks?: boolean;
-};
-
-const Breadcrumb = ({
-  homeElement,
-  listClasses,
-  activeClasses,
-  capitalizeLinks,
-  container,
-}: TBreadCrumbProps) => {
+const Breadcrumb = () => {
   const paths = usePathname();
   const pathNames = paths.split("/").filter((path) => path);
 
-  // States
-  const [open, setOpen] = useState(false);
-  const [tooltipOpen, setTooltipOpen] = useState(false);
-
-  const getModeIcon = () => {
-    return "ri-arrow-right-s-fill";
-  };
-
   return (
-    <>
-      <Tooltip
-        title={"Navigator"}
-        onOpen={() => setTooltipOpen(true)}
-        onClose={() => setTooltipOpen(false)}
-        open={open ? false : tooltipOpen ? true : false}
-        PopperProps={{ className: "capitalize" }}
-      >
-        <i className={getModeIcon()} />
-      </Tooltip>
-      <Breadcrumbs aria-label="breadcrumb" className={container}>
-        <Typography>
-          <Link underline="hover" className="text-slate-900 font-bold">
-            {homeElement}
-          </Link>
-        </Typography>
+    <div className="flex p-5  mt-[64px]">
+      <Breadcrumbs aria-label="breadcrumb">
+        <Link underline="hover" className="text-slate-900 font-bold">
+          <HomeIcon />
+        </Link>
+
         {pathNames.map((link, index) => {
           let href = `/${pathNames.slice(0, index + 1).join("/")}`;
-          let itemClasses =
-            paths === href ? `${listClasses} ${activeClasses}` : listClasses;
-          let itemLink = capitalizeLinks
-            ? link[0].toUpperCase() + link.slice(1)
-            : link;
+          let itemClasses = `hover:underline font-bold text-stone-500 ${
+            paths === href && "text-slate-900"
+          }`;
+          let itemLink = link[0].toUpperCase() + link.slice(1);
+
           return (
-            <Typography key={index}>
-              <Link underline="hover" href={href} className={itemClasses}>
-                {itemLink}
-              </Link>
-            </Typography>
+            <Link
+              key={index}
+              underline="hover"
+              href={href}
+              className={itemClasses}
+            >
+              {itemLink}
+            </Link>
           );
         })}
       </Breadcrumbs>
-    </>
+    </div>
   );
 };
 
-export default Breadcrumb;
+export default withSession(Breadcrumb);

@@ -15,7 +15,7 @@ const UserDetail = ({
     <div className="w-full h-full p-5">
       <Card className="min-w-[320px]">
         <CardMedia
-          image={`https://picsum.photos/id/${id + 15}/700/500`}
+          image={`https://picsum.photos/id/${id + 15}/1500/500`}
           title="Users"
           component="img"
           height="200"

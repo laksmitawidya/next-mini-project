@@ -1,10 +1,11 @@
 "use client";
 
 import { Session } from "next-auth";
+import { signIn, signOut } from "next-auth/react";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-type AuthType = "email" | "google" | null;
+type AuthType = "credentials" | "google" | null;
 type ClientSessionStatus = "authenticated" | "unauthenticated";
 
 type UsersState = {
@@ -24,21 +25,29 @@ export const useUserStore = create<UsersState>()(
       authType: null,
 
       clientSignIn: (userInfo) => {
+        const user = {
+          image: "https://picsum.photos/200/300?random=1",
+          name: "Client Test",
+          email: userInfo.email,
+        };
         set(() => ({
-          user: {
-            image: "https://picsum.photos/200/300?random=1", 
-            name: "Client Test", 
-            email: userInfo.email,
-          },
+          user,
           clientSessionStatus: "authenticated",
         }));
+
+        // Make sure that the auth is happened on the server
+        // so that we can protect the server route
+        signIn("credentials", { ...user, callbackUrl: "/users" });
       },
 
-      clientSignOut: () => {
+      clientSignOut: async () => {
+        // Make sure that the auth is happened on the server
+        // so that we can protect the server route
+        await signOut({ callbackUrl: "/login" });
         set(() => ({
           user: null,
           clientSessionStatus: "unauthenticated",
-          authType: null, 
+          authType: null,
         }));
       },
 
@@ -49,12 +58,12 @@ export const useUserStore = create<UsersState>()(
       },
     }),
     {
-      name: "user-storage", 
+      name: "user-storage",
       partialize: (state) => ({
         user: state.user,
         clientSessionStatus: state.clientSessionStatus,
         authType: state.authType,
-      }), 
+      }),
     }
   )
 );

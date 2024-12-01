@@ -1,8 +1,13 @@
-import Paging from "@/components/Paging";
-import UserCard from "@/components/user/UserCard";
+import Paging from "@/components/clients/Paging";
+import UserCard from "@/components/clients/user/UserCard";
 import { UserResponse } from "@/types/common";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+import withServerSideAuth from "../../components/routes/withServerAuth";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "User List Page",
+  description: "User List Page",
+};
 
 const fetchUsers = async ({ page }: { page: number }) => {
   const res = await fetch(`https://reqres.in/api/users?page=${page}`);
@@ -23,12 +28,6 @@ const UsersPage = async ({
     page: searchParams?.page ? Number(searchParams?.page) : 1,
   });
 
-  const session = await getServerSession();
-
-  if (!session) {
-    redirect("/unauthorized");
-  }
-
   return (
     <div className="p-5">
       <div className="text-4xl mb-10">Users</div>
@@ -47,4 +46,4 @@ const UsersPage = async ({
   );
 };
 
-export default UsersPage;
+export default withServerSideAuth(UsersPage);

@@ -11,7 +11,7 @@ export class Utils {
     const { authType, user } = useUserStore();
     return authType === "google"
       ? data?.user
-      : authType === "email"
+      : authType === "credentials"
       ? user
       : null;
   };

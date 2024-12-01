@@ -1,6 +1,11 @@
-import UserDetail from "@/components/user/UserDetail";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+import UserDetail from "@/components/clients/user/UserDetail";
+import withServerSideAuth from "@/components/routes/withServerAuth";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "User Detail Page",
+  description: "User Detail Page",
+};
 
 const fetchUserDetail = async (id: number) => {
   const res = await fetch(`https://reqres.in/api/users/${id}`);
@@ -15,11 +20,6 @@ const fetchUserDetail = async (id: number) => {
 const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const slug = (await params).slug;
   const userDetail = await fetchUserDetail(Number(slug));
-  const session = await getServerSession();
-
-  if (!session) {
-    redirect("/unauthorized");
-  }
 
   return (
     <>
@@ -31,4 +31,4 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   );
 };
 
-export default Page;
+export default withServerSideAuth(Page);

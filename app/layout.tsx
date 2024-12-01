@@ -1,11 +1,12 @@
+import Breadcrumb from "@/components/clients/BreadCrumb";
+import Footer from "@/components/clients/Footer";
+import Header from "@/components/clients/Header";
+import Loading from "@/components/server/Loading";
 import { SessionProvider } from "@/libs/NextAuthProvider";
 import ThemeRegistry from "@/theme/ThemeRegistry";
 import { getServerSession } from "next-auth";
-import { Inter } from "next/font/google";
+import { Suspense } from "react";
 import "../styles/globals.css";
-import Header from "@/components/Header";
-import Breadcrumb from "@/components/BreadCrumb";
-import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Ara Tech Test",
@@ -18,16 +19,23 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession();
- 
+
   return (
     <html lang="en">
       <SessionProvider session={session}>
         <ThemeRegistry>
           <body className="flex flex-col h-screen">
-            <Header appTitle="Ara Technical Test" />
-            <Breadcrumb />
-            <main className="flex-1"> {children}</main>
-            <Footer />
+            <Suspense fallback={<Loading />}>
+              {session && (
+                <>
+                  <Header userSession={session.user} />
+                  <Breadcrumb />
+                </>
+              )}
+
+              <main className="flex-1 bg-slate-100">{children}</main>
+              {session && <Footer userSession={session.user} />}
+            </Suspense>
           </body>
         </ThemeRegistry>
       </SessionProvider>

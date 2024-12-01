@@ -3,7 +3,7 @@
 import { UserResponse, UsersResponseProps } from "@/types/common";
 import Paging from "../Paging";
 import UserCard from "./UserCard";
-import { withAuth } from "../withAuth";
+import { withAuth } from "../../routes/withAuth";
 
 const Users = async (usersResponse: {
   error: string | undefined;

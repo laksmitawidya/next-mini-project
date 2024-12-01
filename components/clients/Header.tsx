@@ -10,19 +10,15 @@ import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Session } from "next-auth";
-import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import { redirect } from "next/navigation";
 import { MouseEvent, useState } from "react";
-import { withSession } from "./withSession";
 
 export interface HeaderProps {
-  appTitle: string;
   userSession?: Session["user"] | null;
 }
 
-const Header = ({ appTitle, userSession }: HeaderProps) => {
-  const { authType, clientSignOut } = useUserStore();
+const Header = ({ userSession }: HeaderProps) => {
+  const { clientSignOut } = useUserStore();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -35,14 +31,21 @@ const Header = ({ appTitle, userSession }: HeaderProps) => {
   };
 
   return (
-    <AppBar position="fixed" color="default">
+    <AppBar color="default" position="fixed">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          {appTitle}
+          <Image
+            src="/ara-logo.png"
+            alt="No logo found"
+            height={32}
+            width={120}
+          />
         </Typography>
 
-        <div>
-          Hello {userSession?.name}!
+        <div className="flex gap-x-1 justify-center">
+          <span className="invisible sm:visible flex justify-center items-center">
+            Hello {userSession?.name}!
+          </span>
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -93,15 +96,7 @@ const Header = ({ appTitle, userSession }: HeaderProps) => {
             <Divider />
             <MenuItem
               onClick={async () => {
-                // if (authType === "email") {
-                //   await clientSignOut();
-                //   redirect("/login");
-                // }
-                // if (authType === "google") {
                 await clientSignOut();
-
-                await signOut({ callbackUrl: "/login" });
-                // }
                 handleClose();
               }}
             >
@@ -114,4 +109,4 @@ const Header = ({ appTitle, userSession }: HeaderProps) => {
   );
 };
 
-export default withSession(Header);
+export default Header;

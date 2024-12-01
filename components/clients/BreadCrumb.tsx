@@ -1,17 +1,17 @@
 "use client";
 
 import HomeIcon from "@mui/icons-material/Home";
+import { Button } from "@mui/material";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
-import { usePathname } from "next/navigation";
-import { withSession } from "./withSession";
+import { usePathname, useRouter } from "next/navigation";
 
 const Breadcrumb = () => {
   const paths = usePathname();
   const pathNames = paths.split("/").filter((path) => path);
-
+  const routes = useRouter();
   return (
-    <div className="flex p-5  mt-[64px]">
+    <div className="flex p-5 mt-[64px] bg-slate-200">
       <Breadcrumbs aria-label="breadcrumb">
         <Link underline="hover" className="text-slate-900 font-bold">
           <HomeIcon />
@@ -19,20 +19,20 @@ const Breadcrumb = () => {
 
         {pathNames.map((link, index) => {
           let href = `/${pathNames.slice(0, index + 1).join("/")}`;
-          let itemClasses = `hover:underline font-bold text-stone-500 ${
-            paths === href && "text-slate-900"
-          }`;
+
           let itemLink = link[0].toUpperCase() + link.slice(1);
 
           return (
-            <Link
+            <Button
+              className={`!min-w-0 ${paths === href && "!font-bold"}`}
+              size="small"
               key={index}
-              underline="hover"
-              href={href}
-              className={itemClasses}
+              onClick={() => {
+                routes.replace(href);
+              }}
             >
               {itemLink}
-            </Link>
+            </Button>
           );
         })}
       </Breadcrumbs>
@@ -40,4 +40,4 @@ const Breadcrumb = () => {
   );
 };
 
-export default withSession(Breadcrumb);
+export default Breadcrumb;

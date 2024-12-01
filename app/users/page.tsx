@@ -5,7 +5,7 @@ import withServerSideAuth from "../../components/routes/withServerAuth";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "User List Page",
+  title: "User List: Show all users",
   description: "User List Page",
 };
 

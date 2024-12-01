@@ -18,7 +18,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 export const metadata: Metadata = {
-  title: "Login Page",
+  title: "Login: Sign in to get the full feature",
   description: "Login Page",
 };
 
@@ -50,7 +50,15 @@ export const Page = () => {
                 inputProps={{
                   type: "email",
                 }}
-                helperText={emailError ? <span className="text-red-500">Please enter a valid email</span> : ""}
+                helperText={
+                  emailError ? (
+                    <span className="text-red-500">
+                      Please enter a valid email
+                    </span>
+                  ) : (
+                    ""
+                  )
+                }
                 value={email}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                   setEmail(event.target.value);

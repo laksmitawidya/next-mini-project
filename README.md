@@ -28,3 +28,5 @@ To run the web, run the following instructions
 ```
 
 - Make sure to setup the .env file to allow the Google authentication
+
+- Make sure the node version, this program runs well in node v20.10.0

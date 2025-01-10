@@ -20,7 +20,6 @@ const Page = () => {
 
   return (
     <div className="h-screen w-screen bg-black flex gap-3 flex-col justify-center items-center">
-      <Image src="/ara-logo.png" alt="No logo found" height={32} width={120} />
       <div className="flex justify-center items-center gap-4">
         <WarningIcon fontSize="medium" />
         <Typography variant="h5" className="text-white">

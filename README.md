@@ -1,4 +1,4 @@
-# Ara Technical Test
+# laksmitawidya-mini-porto
 
 by laksmitawidya (mithawid@gmail.com)
 
@@ -30,3 +30,12 @@ To run the web, run the following instructions
 - Make sure to setup the .env file to allow the Google authentication
 
 - Make sure the node version, this program runs well in node v20.10.0
+
+## TechStack
+
+- NextJS
+- Next Authy
+- TailwindCSS
+- Google Login
+- Zustand
+- MUI UI Library

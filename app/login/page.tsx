@@ -34,12 +34,6 @@ export const Page = () => {
         <Card className="p-5 w-2/3">
           <CardContent>
             <div className="flex justify-center items-center flex-col gap-y-5">
-              <Image
-                src="/ara-logo.png"
-                alt="No logo found"
-                height={24}
-                width={100}
-              />
               <Typography variant="h3">Sign In</Typography>{" "}
               <div>Enter your email and password</div>
               <TextField

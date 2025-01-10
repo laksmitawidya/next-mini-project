@@ -22,15 +22,9 @@ const Footer = ({ userSession }: { userSession?: Session["user"] | null }) => {
       >
         <div className="flex justify-between bg-slate-200 w-full h-full p-10">
           <div className="flex flex-col w-full justify-center gap-y-2">
-            <Image
-              src="/ara-logo.png"
-              alt="No logo found"
-              height={24}
-              width={100}
-            />
             <div className="text-sm">
-              Technical Test by @laksmitawidya © {currentDate.getFullYear()} •
-              Copyright: Ara App
+              Mini Portfolio by @laksmitawidya © {currentDate.getFullYear()} •
+              Copyright: laksmitawidya-mini-porto
             </div>
           </div>
           <div className="flex">

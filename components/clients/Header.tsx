@@ -34,12 +34,7 @@ const Header = ({ userSession }: HeaderProps) => {
     <AppBar color="default" position="fixed">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          <Image
-            src="/ara-logo.png"
-            alt="No logo found"
-            height={32}
-            width={120}
-          />
+          miniporto
         </Typography>
 
         <div className="flex gap-x-1 justify-center">

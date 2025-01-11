@@ -17,7 +17,7 @@ const fetchUserDetail = async (id: number) => {
   }
 };
 
-const UserDetail = async ({
+const UserDetailPage = async ({
   params,
 }: {
   params: Promise<{ slug: string }>;
@@ -35,4 +35,4 @@ const UserDetail = async ({
   );
 };
 
-export default withServerSideAuth(UserDetail);
+export default withServerSideAuth(UserDetailPage);

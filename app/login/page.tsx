@@ -12,15 +12,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Metadata } from "next";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
-
-export const metadata: Metadata = {
-  title: "Login: Sign in to get the full feature",
-  description: "Login Page",
-};
 
 export const Page = () => {
   const [email, setEmail] = useState("");

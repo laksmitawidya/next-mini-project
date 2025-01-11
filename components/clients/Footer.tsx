@@ -24,7 +24,7 @@ const Footer = ({ userSession }: { userSession?: Session["user"] | null }) => {
           <div className="flex flex-col w-full justify-center gap-y-2">
             <div className="text-sm">
               Mini Portfolio by @laksmitawidya © {currentDate.getFullYear()} •
-              Copyright: laksmitawidya-mini-porto
+              Copyright: laksmitawidya
             </div>
           </div>
           <div className="flex">

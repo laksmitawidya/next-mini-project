@@ -1,16 +1,9 @@
 "use client";
 
-import { Button, CircularProgress, Divider, Typography } from "@mui/material";
 import WarningIcon from "@mui/icons-material/Warning";
-import { useRouter } from "next/navigation";
-import { Metadata } from "next";
-import Image from "next/image";
+import { Button, Divider, Typography } from "@mui/material";
 import { useSession } from "next-auth/react";
-
-export const metadata: Metadata = {
-  title: "Unauthorized Page",
-  description: "Unauthorized Page",
-};
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const router = useRouter();

@@ -16,7 +16,7 @@ import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
 
-export const LoginPage = () => {
+const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);

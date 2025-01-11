@@ -1,6 +1,6 @@
 "use client";
 
-import { withAuth } from "@/components/routes/withAuth";
+import withAuth from "@/components/routes/withAuth";
 import { useUserStore } from "@/libs/UserStore";
 import GoogleIcon from "@mui/icons-material/Google";
 import {

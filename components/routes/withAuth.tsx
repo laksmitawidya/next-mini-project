@@ -9,7 +9,7 @@ import { Suspense } from "react";
 const publicRoutes = { login: "/login" };
 const privateRoutes = { users: "/users" };
 
-export const withAuth = (WrappedComponent: React.FC<any>) => {
+const withAuth(WrappedComponent: React.FC<any>) {
   return function ClientSideComponent(props: any) {
     const pathname = usePathname();
 
@@ -44,4 +44,7 @@ export const withAuth = (WrappedComponent: React.FC<any>) => {
       </Suspense>
     );
   };
-};
+}
+
+
+export default withAuth

@@ -17,7 +17,11 @@ const fetchUserDetail = async (id: number) => {
   }
 };
 
-const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
+const UserDetail = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) => {
   const slug = (await params).slug;
   const userDetail = await fetchUserDetail(Number(slug));
 
@@ -31,4 +35,4 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   );
 };
 
-export default withServerSideAuth(Page);
+export default withServerSideAuth(UserDetail);

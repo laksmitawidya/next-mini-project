@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/components/server/Loading";
 import WarningIcon from "@mui/icons-material/Warning";
 import { Button, Divider, Typography } from "@mui/material";
 import { useSession } from "next-auth/react";
@@ -9,7 +10,7 @@ const Page = () => {
   const router = useRouter();
   const { status } = useSession();
 
-  if (status === "authenticated") return null;
+  if (status === "authenticated" || status === "loading") return <Loading />;
 
   return (
     <div className="h-screen w-screen bg-black flex gap-3 flex-col justify-center items-center">

@@ -7,12 +7,15 @@ export class Utils {
   // - useUserStore is for client authentication to satisfy the login flow mechanism implementation
 
   static getUserSession = () => {
-    const { data } = useSession();
+    const { data, status } = useSession();
     const { authType, user } = useUserStore();
-    return authType === "google"
-      ? data?.user
-      : authType === "credentials"
-      ? user
-      : null;
+    const authUser =
+      authType === "google"
+        ? data?.user
+        : authType === "credentials"
+        ? user
+        : null;
+
+    return { status, authUser };
   };
 }

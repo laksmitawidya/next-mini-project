@@ -7,6 +7,10 @@ const withServerSideAuth = (WrappedComponent: React.FC<any>) => {
   return async function ServerSideComponent(props: any) {
     const session = await getServerSession();
 
+    if (session && session?.user === undefined) {
+      // return <Loading />;
+    }
+
     if (!session) {
       await redirect("/unauthorized");
     }

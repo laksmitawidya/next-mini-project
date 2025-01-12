@@ -2,8 +2,9 @@
 
 import { Utils } from "@/libs/utils";
 import { CircularProgress } from "@mui/material";
-import { redirect, usePathname } from "next/navigation";
-import { Suspense } from "react";
+import { redirect, usePathname, useRouter } from "next/navigation";
+import { Suspense, useEffect } from "react";
+import Loading from "../server/Loading";
 
 // This page is only to handle the client side
 const publicRoutes = { login: "/login" };
@@ -12,22 +13,33 @@ const privateRoutes = { users: "/users" };
 const withAuth = (WrappedComponent: React.FC<any>) => {
   return function ClientSideComponent(props: any) {
     const pathname = usePathname();
+    const router = useRouter();
 
-    const userSession = Utils.getUserSession();
+    const { authUser, status } = Utils.getUserSession();
 
-    if (!userSession && pathname !== publicRoutes.login) {
-      return redirect(publicRoutes.login);
+    if (
+      pathname === publicRoutes.login &&
+      !authUser &&
+      status === "authenticated"
+    ) {
+      return <Loading />;
     }
 
-    if (!userSession && pathname !== publicRoutes.login) {
+    if (
+      !authUser &&
+      pathname !== publicRoutes.login &&
+      status === "unauthenticated"
+    ) {
+      router.replace(publicRoutes.login);
       return null;
     }
 
-    if (userSession && pathname === publicRoutes.login) {
-      return redirect(privateRoutes.users);
-    }
-
-    if (userSession && pathname === publicRoutes.login) {
+    if (
+      authUser &&
+      pathname === publicRoutes.login &&
+      status === "authenticated"
+    ) {
+      router.replace(privateRoutes.users);
       return null;
     }
 
@@ -40,7 +52,7 @@ const withAuth = (WrappedComponent: React.FC<any>) => {
           </div>
         }
       >
-        <WrappedComponent {...props} userSession={userSession} />
+        <WrappedComponent {...props} userSession={authUser} />
       </Suspense>
     );
   };
